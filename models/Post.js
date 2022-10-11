@@ -109,7 +109,14 @@ const PostSchema = new mongoose.Schema({
     type: Array,
     require: true,
   },
-  
+  priceWanted:{
+    type: String,
+    require: true,
+  },
+  priceOfficial:{
+    type: String,
+    require: true,
+  },
   public: {
     type: Boolean,
     require: true,
