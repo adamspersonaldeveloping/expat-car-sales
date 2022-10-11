@@ -1,0 +1,103 @@
+ <%if(window.location.pathname === "/feedZtoA"){ %>
+        <a href="/feed" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">List A - Z</a>
+         <%}%>
+
+<%if(window.location.pathname === "/feed"){ %>
+   <a href="/feedZtoA" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">List Z - A</a>
+    <%}%>
+
+<!-- to delete a forumPost if the user is the creater -->
+
+<div class="row justify-content-center">  
+
+ <%if(post.user == user.id){ %>
+        <form
+        class="row justify-content-center mt-3"
+          action="/post/deletePost/<%= post.id %>?_method=DELETE"
+          method="POST" 
+        >
+          <button class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold mt-2 mb-2" type="submit">Delete drink</button>
+        </form>
+        <%}%>
+</div>
+
+<!-- from post of cocktails -->
+ <!-- change the like to a favorite. give user an array for _id's that are from the post that they have liked. -->
+ <%if(!user.favorites.includes(post.id)){ %>
+  <form
+  class="row justify-content-center mt-3"
+  action="/post/favoritePost/<%= post.id %>?_method=PUT"
+  method="POST"
+>
+  <button class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold mt-2" type="submit">Add to favorites</button>
+</form>
+   <%}%>
+  <%if(user.favorites.includes(post.id)){ %>
+    <form
+  class="row justify-content-center mt-3"
+  action="/post/deleteFavorite/<%= post.id %>?_method=PUT"
+  method="POST"
+>
+  <button class=" btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold mt-2" type="submit">Remove from favorites</button>
+</form>
+    
+    <%}%>
+
+
+<%if(post.user == user.id){ %>
+<form
+class="row justify-content-center mt-3"
+  action="/post/deletePost/<%= post.id %>?_method=DELETE"
+  method="POST" 
+>
+  <button class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold mt-2 mb-2" type="submit">Delete drink</button>
+</form>
+  <% if(post.public == true){ %>
+    <form
+      class="row justify-content-center mt-3"
+      action="/post/makePrivate/<%= post.id %>?_method=PUT"
+      method="POST" 
+    >
+    <button class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold mt-2 mb-2" type="submit">Mark Drink Hidden</button>
+    </form>
+  <% } else{ %>  
+    <form
+      class="row justify-content-center mt-3"
+      action="/post/makePublic/<%= post.id %>?_method=PUT"
+      method="POST" 
+    >
+    <button class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold mt-2 mb-2" type="submit">Mark Drink Public</button>
+    </form>
+  <% } %>
+<%}%>
+
+</div>
+<div class="d-flex flex-column felx-wrap mt-5 text-center ">
+  <h3 class="text-white ">Ingredients</h3>
+  <ul class="row list-unstyled">
+    <% for(let i=0; i<post.ingredients.length; i++) {%>
+      <%if(post.ingredients[i] !== ''){ %>
+        <li class="text-secondary"><%= post.ingredients[i] %></li>
+      <%}%>
+      
+      <% } %>
+  </ul>
+</div>
+<div class=" mt-5 text-center">
+  <h3 class="text-white">Method</h3>
+  <p class="text-secondary"><%= post.method %></p>
+</div>
+<div class=" mt-5  text-center">
+  <h3 class="text-white">Garnish</h3>
+  <p class="text-secondary"><%= post.garnish %></p>
+</div>
+<div class="mt-5  text-center">
+  <h3 class="text-white">Note</h3>
+  <p class="text-secondary"><%= post.note %></p>
+</div>
+<%if(post.ibaCocktail == true){ %>
+  <div class="col-3  text-center">
+    <h3 class="text-white">IBA Standardize Cocktail</h3>
+    <p class="text-secondary"><%= post.importance %></p>
+  </div>
+  <%}%>

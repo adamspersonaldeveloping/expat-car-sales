@@ -1,0 +1,239 @@
+const cloudinary = require("../middleware/cloudinary");
+const Post = require("../models/Post");
+const User = require("../models/User")
+
+module.exports = {
+  getProfile: async (req, res) => {
+    try {
+      const posts = await Post.find({ user: req.user.id });
+      res.render("profile.ejs", { posts: posts, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getFavorites: async (req, res) => {
+    try {
+      //const favs = await req.user.favorites.find({ user: req.user.id})
+      const posts = await Post.find({ _id: { $in : req.user.favorites}});
+      res.render("favorites.ejs", { posts: posts, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getFeed: async (req, res) => {
+    try {
+      const allPosts = await Post.find().sort({ cocktailName: 1 }).lean();
+      const posts = allPosts.filter((e)=> e.public !== false)
+      res.render("feed.ejs", { posts: posts });
+      
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getFeedZtoA: async (req, res) => {
+    try {
+      const allPosts = await Post.find().sort({ cocktailName: -1 }).lean();
+      const posts = allPosts.filter((e)=> e.public !== false)
+      res.render("feed.ejs", { posts: posts });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getPost: async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+      res.render("post.ejs", { post: post, user: req.user });
+      //console.log(post)
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  createPost: async (req, res) => {
+    console.log(req.files.exteriorFiles)
+    console.log(req.files.length)
+    try {
+      let exteriorResult,
+      interiorResult,
+      documentResult;
+      let exteriorImgUrlArray = []
+      let interiorImgArray = []
+      let documentImgArray = []
+
+      for (let i = 0; i < req.files.exteriorFiles.length; i++){
+        exteriorResult = await cloudinary.uploader.upload(req.files.exteriorFiles[i].path);
+        exteriorImgUrlArray.push(exteriorResult.secure_url)
+        //imgIdArray.push(exteriorResult.secure_url)
+      }
+      
+      for (let i = 0; i < req.files.interiorFiles.length; i++){
+        interiorResult = await cloudinary.uploader.upload(req.files.interiorFiles[i].path);
+        interiorImgArray.push(interiorResult.secure_url)
+        //imgIdArray.push(interiorResult.secure_url)
+      }
+      for (let i = 0; i < req.files.documentFiles.length; i++){
+        documentResult = await cloudinary.uploader.upload(req.files.documentFiles[i].path);
+        documentImgArray.push(documentResult.secure_url)
+        //imgIdArray.push(documentResult.secure_url)
+      }
+      console.log(exteriorImgUrlArray, interiorImgArray, documentImgArray)
+    
+      await Post.create({
+        ownerName: req.body.ownerName,
+        ownerPhone: req.body.ownerPhone,
+        ownerEmail: req.body.ownerEmail,
+        ownerDeparture: req.body.ownerDeparture,
+        ownerPassportChanged: req.body.ownerPassportChanged,
+        make: req.body.make,
+        model: req.body.model,
+        spec: req.body.spec,
+        engineSize: req.body.engineSize,
+        year: req.body.year,
+        transmission: req.body.transmission,
+        numOfSeats: req.body.numOfSeats,
+        color: req.body.color,
+        fuelType: req.body.fuelType,
+        tires: req.body.tires,
+        mileage: req.body.mileage,
+        history: req.body.history,
+        numOfOwners: req.body.numOfOwners,
+        accidents: req.body.accidents,
+        modifications: req.body.modifications,
+        repairs: req.body.repairs,
+        issues: req.body.issues,
+        interiorImage: interiorImgArray,
+        exteriorImage: exteriorImgUrlArray,
+        documentImage: documentImgArray,
+        // cloudinaryId: imgUrlArray,   
+        public: req.body.public || 'false',
+        user: req.user.id,
+        agreement: req.body.agreement,
+      });
+      
+      console.log("Post has been added!");
+      res.redirect("/profile");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  updatePost: async (req, res) => {
+    // change this to update the post info
+    try {
+      await Post.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $set: {
+            ownerName: req.body.ownerName,
+        ownerPhone: req.body.ownerPhone,
+        ownerEmail: req.body.ownerEmail,
+        ownerDeparture: req.body.ownerDeparture,
+        ownerPassportChanged: req.body.ownerPassportChanged,
+        make: req.body.make,
+        model: req.body.model,
+        spec: req.body.spec,
+        engineSize: req.body.engineSize,
+        year: req.body.year,
+        transmission: req.body.transmission,
+        numOfSeats: req.body.numOfSeats,
+        color: req.body.color,
+        fuelType: req.body.fuelType,
+        tires: req.body.tires,
+        mileage: req.body.mileage,
+        history: req.body.history,
+        numOfOwners: req.body.numOfOwners,
+        accidents: req.body.accidents,
+        modifications: req.body.modifications,
+        repairs: req.body.repairs,
+        issues: req.body.issues,
+        // image: result.secure_url,
+        // cloudinaryId: result.public_id,   
+        public: req.body.public || 'false',
+        
+          },
+        }
+      );
+      
+      console.log("Post has been updated");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  favoritePost: async (req, res) => {
+    // change this to save the post id to an array under the User
+    try {
+      await User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $push: {favorites: req.params.id },
+        }
+      );
+      
+      console.log("Added to favorites");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  deleteFavorite: async (req, res) => {
+    // change this to delete the post id to an array under the User
+    try {
+      await User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $pull: {favorites: req.params.id },
+        }
+      );
+      
+      console.log("Removed from favs");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  makePrivate: async (req, res) => {
+    // change this to save the post id to an array under the User
+    try {
+      await Post.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $set: {public: false },
+        }
+      );
+      
+      console.log("made post private");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  makePublic: async (req, res) => {
+    // change this to save the post id to an array under the User
+    try {
+      await Post.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $set: {public: true },
+        }
+      );
+      
+      console.log("made post public");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  deletePost: async (req, res) => {
+    try {
+      // Find post by id
+      let post = await Post.findById({ _id: req.params.id });
+      // Delete image from cloudinary
+      await cloudinary.uploader.destroy(post.cloudinaryId);
+      // Delete post from db
+      await Post.remove({ _id: req.params.id });
+      console.log("Deleted Post");
+      res.redirect("/profile");
+    } catch (err) {
+      res.redirect("/profile");
+    }
+  },
+};

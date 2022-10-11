@@ -1,0 +1,111 @@
+<%- include('partials/header') -%>
+<div class="container text-secondary">
+  <div class="row mt-5">
+      <div class="col-10">
+          <div>
+              <p><strong class="text-white">User Name</strong>: <%= user.userName %></p>
+              <p><strong class="text-white">Email</strong>: <%= user.email %></p>
+              <a href="/logout" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Logout</a>
+          </div>
+          <div class="mt-12">
+            <h2 class="text-white">CAR SUBMISSION FORM</h2>
+            <h3 class="" style="background-color: red; color: white; font-style:italic;">All fields are mandatory</h3>
+            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+              <div class="mb-10">
+                <span class="text-white">Please check the following box and then fill in the form below.</span>
+                  <label for="agreement" class="form-check-label">I give Expat Car Sales Sdn Bhd exclusive rights to sell my car. <a href="#">View Terms and Conditions</a></label>
+                  <input type="checkbox" class="form-check-input" id="agreement" name="agreement">
+              </div>
+              <div class="mb-10 ingredientContainer">
+                <h2 class="text-white mb-10">Owner Contact Info</h2>
+                <label for="ownerName" class="pt-3 pb-2" >Owner's Full Name</label>
+                <input type="text" placeholder="Type Full Name" name="ownerName" class="form-control transBack"> 
+                <label for="ownerPhone" class=" pt-3 pb-2">Owner's Contact Number</label>
+                <input type="text" placeholder="ex. +61 111 123 4567" name="ownerPhone" class="form-control transBack mb-10"> 
+                <label for="ownerEmail" class="pt-3 pb-2">Owner's Email Addess</label>
+                <input type="text" placeholder="ex. tom123@gmail.com" name="ownerEmail" class="form-control transBack mb-10"> 
+                <label for="ownerDeparture" class="pt-3 pb-2">Leaving Malaysia? If yes, what is your date of departure?</label>
+                <input type="text" placeholder="Yes, July 4, 2022" name="ownerDeparture" class="form-control transBack mb-10"> 
+                <label for="ownerPassportChanged" class="pt-3 pb-2">Have you changed your passport since buying the car?</label>
+                <input type="text" placeholder="Yes or no? If yes, please attach a scan of your passport info page." name="ownerPassportChanged" class="form-control transBack mb-10"> 
+            </div>
+            <div class="mb-10 pt-4">
+              <h2 class="text-white">Vehicle Info</h2>
+              <label for="make" class="form-label pt-3 pb-2">Make</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="make" name="make">
+              <label for="model" class="form-label pt-3 pb-2">Model</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="model" name="model">
+              <label for="spec" class="form-label pt-3 pb-2">Spec</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="spec" name="spec">
+              <label for="engineSize" class="form-label pt-3 pb-2">Engine Size</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="engineSize" name="engineSize">
+              <label for="year" class="form-label pt-3 pb-2">Year</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="year" name="year">
+              <label for="transmission" class="form-label pt-3 pb-2">Transmission</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="transmission" name="transmission">
+              <label for="numOfSeats" class="form-label pt-3 pb-2">Number of Seats</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="numOfSeats" name="numOfSeats">
+              <label for="color" class="form-label pt-3 pb-2">Color</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="color" name="color">
+              <label for="fuelType" class="form-label pt-3 pb-2">Fuel Type</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="fuelType" name="fuelType">
+              <label for="tires" class="form-label pt-3 pb-2">Tires Condition</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="tires" name="tires">
+              <label for="mileage" class="form-label pt-3 pb-2">Mileage in Kilometers</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="mileage" name="mileage" placeholder="ex. 52,xxx" >
+              <label for="history" class="form-label pt-3 pb-2">Full Service History?</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="history" name="history" placeholder="If yes, say yes. If no, please briefly explain" >
+              <label for="numOfOwners" class="form-label pt-3 pb-2">Total number of owners</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="numOfOwners" name="numOfOwners">
+              <label for="accidents" class="form-label pt-3 pb-2">Accidents?</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="accidents" name="accidents">
+              <label for="modifications" class="form-label pt-3 pb-2">Modifications</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="modifications" name="modifications">
+              <label for="repairs" class="form-label pt-3 pb-2">Major Repairs</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="repairs" name="repairs">
+              <label for="issues" class="form-label pt-3 pb-2">Current Known Issues</label>
+              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="issues" name="issues" placeholder="Please let any issues, large or small, that you know of." >
+            </div>
+            <div class="mb-10 pt-4">
+              <h2 class="text-white">Photo Instructions & Upload</h2>
+              <h2 class="text-white">For Gerald: I am still working on how to upload multiple photos this is just for testing.</h2>
+              <label for="exteriorFiles" class="form-label">Exterior Photos</label>
+              <input style="background:rgba(255,255,255,0.7)" type="file" class="form-control" id="exteriorFiles" name="exteriorFiles" required multiple >
+              <label for="interiorFiles" class="form-label">Interior Photos</label>
+              <input style="background:rgba(255,255,255,0.7)" type="file" class="form-control" id="interiorFiles" name="interiorFiles" required multiple >
+              <label for="documentFiles" class="form-label">Photos of Documents</label>
+              <input style="background:rgba(255,255,255,0.7)" type="file" class="form-control" id="documentFiles" name="documentFiles" required multiple >
+            </div>
+            <%if(user.isBoss == true){ %>
+            <div class="mb-10 form-check form-switch pt-4">
+              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="public" value="true">
+              <label class="form-check-label" for="flexSwitchCheckChecked">This will only be viewable by Gerald</label>
+            </div>
+            <%}%>
+              <button type="submit" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold pt-4" value="Upload">Submit</button>
+            </form>
+          </div>
+      </div>
+      <div class="col-10">
+        <ul class="row list-unstyled">
+        <% for(var i=0; i<posts.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/post/<%= posts[i]._id%>">
+              <img class="img-fluid" src="<%= posts[i].exteriorImage[0]%>">
+              <h2 class="text-white"><%= posts[i].year %> <%= posts[i].make %> <%= posts[i].model %></h2>
+            </a>
+            <span class="text-white"><%= posts[i].cocktailName %></span>
+          </li>
+        <% } %>
+        </ul>
+        <div class="row justify-content-center mt-5">
+          <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="/feed">Our Showroom</a>
+        </div>  
+        <!-- <div class="row justify-content-center mt-3">
+          <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="/favorites">Favorites</a>
+        </div> -->
+      </div>  
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') -%>
