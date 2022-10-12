@@ -105,7 +105,7 @@ module.exports = {
         documentImage: documentImgArray,
         // cloudinaryId: imgUrlArray,
         priceWanted: req.body.priceWanted,
-        priceOfficial: req.body.priceOfficial || req.body.priceWanted,   
+        priceOfficial: req.body.priceOfficial || req.body.priceWanted || 'Call For Price',   
         public: req.body.public || 'false',
         user: req.user.id,
         agreement: req.body.agreement,
@@ -119,6 +119,8 @@ module.exports = {
   },
   updatePost: async (req, res) => {
     // change this to update the post info
+    //let gerald update photos
+    //update to blank goes to blank not old submission
     try {
       await Post.findOneAndUpdate(
         { _id: req.params.id },
@@ -147,8 +149,9 @@ module.exports = {
         repairs: req.body.repairs,
         issues: req.body.issues,
         // image: result.secure_url,
-        // cloudinaryId: result.public_id,   
-        public: req.body.public || 'false',
+        // cloudinaryId: result.public_id,
+        priceOfficial: req.body.priceOfficial || req.body.priceWanted || 'Call For Price',   
+        public: req.body.public || 'true',
         
           },
         }
