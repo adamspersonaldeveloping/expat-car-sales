@@ -11,6 +11,11 @@ router.get("/", homeController.getIndex);
 router.get("/profile", ensureAuth, postsController.getProfile);
 router.get("/favorites", ensureAuth, postsController.getFavorites); //maybe delete this
 router.get("/feed", postsController.getFeed);
+router.get("/sellYourCar", homeController.getSellYourCar)
+router.post("/addEmailToList", homeController.addEmailToList)//addEmailToList
+router.get("/thankYou", homeController.getThankYou)
+router.get("/emailList", homeController.getEmails)
+
 
 router.get("/forumFeed", ensureAuth, forumController.getForumFeed);
 
