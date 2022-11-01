@@ -6,6 +6,9 @@
               <p><strong class="text-white">User Name</strong>: <%= user.userName %></p>
               <p><strong class="text-white">Email</strong>: <%= user.email %></p>
               <a href="/logout" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Logout</a>
+              <%if(user.isBoss == true){ %>
+                <a href="/emailList" class="btn btn-outline-danger btn-lg px-4 me-sm-3 fw-bold">View Email List</a>
+              <%}%>
           </div>
           <div class="mt-12">
             <h2 class="text-white">CAR SUBMISSION FORM</h2>
@@ -42,7 +45,11 @@
               <label for="year" class="form-label pt-3 pb-2">Year</label>
               <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="year" name="year">
               <label for="transmission" class="form-label pt-3 pb-2">Transmission</label>
-              <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="transmission" name="transmission">
+              <select name="transmission" id="transmission">
+                <option value="Automatic">Automatic</option>
+                <option value="Manual">Manual</option>
+              </select>
+              <!-- <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="transmission" name="transmission"> -->
               <label for="numOfSeats" class="form-label pt-3 pb-2">Number of Seats</label>
               <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="numOfSeats" name="numOfSeats">
               <label for="color" class="form-label pt-3 pb-2">Color</label>
@@ -70,7 +77,9 @@
             </div>
             <div class="mb-10 pt-4">
               <h2 class="text-white">Photo Instructions & Upload</h2>
-              <h2 class="text-white">For Gerald: I am still working on how to upload multiple photos this is just for testing.</h2>
+              <h2 class="text-white">You must upload at least one (1) file for each catagory (Exterior, Interior, and Documents)<br>After "submitting" the photos will take a few seconds to upload. DO NOT press the back button or leave the page while photos are being uploaded.</h2>
+              <!-- <label for="thumbNail" class="form-label">Thumbnail (Choose only one)</label>
+              <input style="background:rgba(255,255,255,0.7)" type="file" class="form-control" id="thumbNail" name="thumbNail" required > -->
               <label for="exteriorFiles" class="form-label">Exterior Photos</label>
               <input style="background:rgba(255,255,255,0.7)" type="file" class="form-control" id="exteriorFiles" name="exteriorFiles" required multiple >
               <label for="interiorFiles" class="form-label">Interior Photos</label>
@@ -84,7 +93,7 @@
               <label class="form-check-label" for="flexSwitchCheckChecked">This will only be viewable by Gerald</label>
             </div>
             <%}%>
-              <button type="submit" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold pt-4" value="Upload">Submit</button>
+              <button type="submit" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold mt-4" value="Upload">Submit</button>
             </form>
           </div>
       </div>
