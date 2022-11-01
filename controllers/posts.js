@@ -1,6 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
-const User = require("../models/User")
+const User = require("../models/User");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -49,20 +49,39 @@ module.exports = {
     }
   },
   createPost: async (req, res) => {
-    console.log(req.files.exteriorFiles)
+    console.log(req.files.thumbNail)
     console.log(req.files.length)
     try {
       let exteriorResult,
       interiorResult,
       documentResult;
+
       let exteriorImgUrlArray = []
       let interiorImgArray = []
       let documentImgArray = []
 
+      // let thumbNail = await cloudinary.uploader.upload(req.file.thumbNail.path, {
+      //   public_id: `${req.body.make}-${req.body.model}-${req.body.year}`,
+      //   background_removal: 'cloudinary_ai',
+      //   notification_url: ""
+      // })
+
       for (let i = 0; i < req.files.exteriorFiles.length; i++){
         exteriorResult = await cloudinary.uploader.upload(req.files.exteriorFiles[i].path);
         exteriorImgUrlArray.push(exteriorResult.secure_url)
-        //imgIdArray.push(exteriorResult.secure_url)
+        //trying to get a thumbnail as first upload with background removed
+        //see this documentation -> https://cloudinary.com/documentation/cloudinary_ai_background_removal_addon#asynchronous_handling_for_upload_update
+        // if(i = 0){
+        //   let thumbNail = await cloudinary.uploader.upload(req.file.thumbNail.path, {
+        //       public_id: `${req.body.make}-${req.body.model}-${req.body.year}`,
+        //       background_removal: 'cloudinary_ai',
+        //       notification_url: ""
+        //     })
+        //   exteriorImgUrlArray.push(thumbNail.secure_url)
+        // }else{
+        //   exteriorResult = await cloudinary.uploader.upload(req.files.exteriorFiles[i].path);
+        //   exteriorImgUrlArray.push(exteriorResult.secure_url)
+        // }
       }
       
       for (let i = 0; i < req.files.interiorFiles.length; i++){
@@ -100,6 +119,7 @@ module.exports = {
         modifications: req.body.modifications,
         repairs: req.body.repairs,
         issues: req.body.issues,
+        thumbNail: exteriorImgUrlArray[0],
         interiorImage: interiorImgArray,
         exteriorImage: exteriorImgUrlArray,
         documentImage: documentImgArray,
