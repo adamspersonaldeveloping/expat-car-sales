@@ -93,6 +93,10 @@ const PostSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  thumbNail: {
+    type: String,
+    require: false,
+  },
   interiorImage: {
     type: Array,
     require: true,
