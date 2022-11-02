@@ -11,6 +11,21 @@ module.exports = {
   getThankYou: (req, res) => {
     res.render('thankYou.ejs')
   },
+  getViewing: (req, res) => {
+    res.render('viewing.ejs')
+  },
+  getServicing: (req, res) => {
+    res.render('servicing.ejs')
+  },
+  getInspection: (req, res) => {
+    res.render('inspection.ejs')
+  },
+  getContact: (req, res) => {
+    res.render('contact.ejs')
+  },
+  getAbout: (req, res) => {
+    res.render('about.ejs')
+  },
   getEmails: async (req, res) => {
     try {
       const emails = await Email.find().sort({ createdAt: 1 }).lean();
@@ -21,6 +36,9 @@ module.exports = {
       console.log(err);
     }
   
+  },
+  getServices: (req, res) => {
+    res.render('ourServices.ejs')
   },
 
   addEmailToList: async (req, res) => {

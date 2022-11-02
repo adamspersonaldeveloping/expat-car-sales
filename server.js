@@ -63,6 +63,7 @@ app.use("/post", postRoutes);
 app.use("/forum", forumRoutes);
 app.use('/comment', commentRoutes)
 app.use('/sellYourCar', mainRoutes)
+app.use('/services', mainRoutes)
 
 //Server Running
 app.listen(process.env.PORT, () => {

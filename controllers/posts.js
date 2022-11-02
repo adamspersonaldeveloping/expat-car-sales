@@ -59,6 +59,7 @@ module.exports = {
       let exteriorImgUrlArray = []
       let interiorImgArray = []
       let documentImgArray = []
+      let cloudinaryIDArray = []
 
       // let thumbNail = await cloudinary.uploader.upload(req.file.thumbNail.path, {
       //   public_id: `${req.body.make}-${req.body.model}-${req.body.year}`,
@@ -69,10 +70,12 @@ module.exports = {
       for (let i = 0; i < req.files.exteriorFiles.length; i++){
         exteriorResult = await cloudinary.uploader.upload(req.files.exteriorFiles[i].path);
         exteriorImgUrlArray.push(exteriorResult.secure_url)
-        //trying to get a thumbnail as first upload with background removed
-        //see this documentation -> https://cloudinary.com/documentation/cloudinary_ai_background_removal_addon#asynchronous_handling_for_upload_update
+        cloudinaryIDArray.push(exteriorResult.public_id)
+        // trying to get a thumbnail as first upload with background removed
+        // see this documentation -> https://cloudinary.com/documentation/cloudinary_ai_background_removal_addon#asynchronous_handling_for_upload_update
+        
         // if(i = 0){
-        //   let thumbNail = await cloudinary.uploader.upload(req.file.thumbNail.path, {
+        //   let thumbNail = await cloudinary.uploader.upload(req.files.exteriorFiles[i].path, {
         //       public_id: `${req.body.make}-${req.body.model}-${req.body.year}`,
         //       background_removal: 'cloudinary_ai',
         //       notification_url: ""
@@ -83,18 +86,22 @@ module.exports = {
         //   exteriorImgUrlArray.push(exteriorResult.secure_url)
         // }
       }
+
+     
       
       for (let i = 0; i < req.files.interiorFiles.length; i++){
         interiorResult = await cloudinary.uploader.upload(req.files.interiorFiles[i].path);
         interiorImgArray.push(interiorResult.secure_url)
+        cloudinaryIDArray.push(interiorResult.public_id)
         //imgIdArray.push(interiorResult.secure_url)
       }
       for (let i = 0; i < req.files.documentFiles.length; i++){
         documentResult = await cloudinary.uploader.upload(req.files.documentFiles[i].path);
         documentImgArray.push(documentResult.secure_url)
+        cloudinaryIDArray.push(documentResult.public_id)
         //imgIdArray.push(documentResult.secure_url)
       }
-      console.log(exteriorImgUrlArray, interiorImgArray, documentImgArray)
+      console.log(cloudinaryIDArray,exteriorImgUrlArray, interiorImgArray, documentImgArray)
     
       await Post.create({
         ownerName: req.body.ownerName,
@@ -123,7 +130,7 @@ module.exports = {
         interiorImage: interiorImgArray,
         exteriorImage: exteriorImgUrlArray,
         documentImage: documentImgArray,
-        // cloudinaryId: imgUrlArray,
+        cloudinaryId: cloudinaryIDArray,
         priceWanted: req.body.priceWanted,
         priceOfficial: req.body.priceOfficial || req.body.priceWanted || 'Call For Price',   
         public: req.body.public || 'false',
@@ -252,7 +259,11 @@ module.exports = {
       // Find post by id
       let post = await Post.findById({ _id: req.params.id });
       // Delete image from cloudinary
-      await cloudinary.uploader.destroy(post.cloudinaryId);
+      console.log(post.cloudinaryId)
+      for(let i = 0; i < post.cloudinaryId.length; i++){
+        await cloudinary.uploader.destroy(post.cloudinaryId[i]);
+      }
+      
       // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");

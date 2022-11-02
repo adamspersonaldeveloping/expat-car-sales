@@ -16,6 +16,14 @@ router.post("/addEmailToList", homeController.addEmailToList)//addEmailToList
 router.get("/thankYou", homeController.getThankYou)
 router.get("/emailList", homeController.getEmails)
 
+router.get("/services", homeController.getServices)
+router.get("/viewing", homeController.getViewing)
+router.get("/servicing", homeController.getServicing)
+router.get("/inspection", homeController.getInspection)
+
+router.get("/contact", homeController.getContact)
+router.get("/about", homeController.getAbout)
+
 
 router.get("/forumFeed", ensureAuth, forumController.getForumFeed);
 

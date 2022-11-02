@@ -92,6 +92,16 @@
         </div> 
         <!-- end document carousel -->
       <%}%> 
+      //add delete option
+      <%if(user.isBoss == true){ %>
+        <form
+        class="row justify-content-center mt-3"
+          action="/post/deletePost/<%= post.id %>?_method=DELETE"
+          method="POST" 
+        >
+          <button class="btn btn-outline-danger btn-lg px-4 me-sm-3 fw-bold mt-2 mb-2" type="submit">Delete This Post</button>
+        </form>
+      <%}%>
     </div>
     <div class="row">
       <img class="img-fluid" style="max-width: 25%;" src="https://res.cloudinary.com/dllmha3wx/image/upload/v1665380415/phisycal-inspection_bdkei7.png" alt="physical inspection img">

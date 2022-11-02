@@ -8,6 +8,7 @@
               <a href="/logout" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Logout</a>
               <%if(user.isBoss == true){ %>
                 <a href="/emailList" class="btn btn-outline-danger btn-lg px-4 me-sm-3 fw-bold">View Email List</a>
+                <input type="button" class="btn btn-outline-warning btn-lg px-4 me-sm-3 fw-bold" value="Scroll to Cars" onClick="document.getElementById('carsSection').scrollIntoView();" />
               <%}%>
           </div>
           <div class="mt-12">
@@ -77,7 +78,9 @@
             </div>
             <div class="mb-10 pt-4">
               <h2 class="text-white">Photo Instructions & Upload</h2>
-              <h2 class="text-white">You must upload at least one (1) file for each catagory (Exterior, Interior, and Documents)<br>After "submitting" the photos will take a few seconds to upload. DO NOT press the back button or leave the page while photos are being uploaded.</h2>
+              <h2 class="text-white">You must upload at least one (1) file for each catagory (Exterior, Interior, and Documents)
+                <br>After "submitting" the photos will take a few seconds to upload. DO NOT press the back button or leave the page while photos are being uploaded.
+                <br>Please note, only ".jpg", ".jpeg", and ".png" file types are supported at the moment.</h2>
               <!-- <label for="thumbNail" class="form-label">Thumbnail (Choose only one)</label>
               <input style="background:rgba(255,255,255,0.7)" type="file" class="form-control" id="thumbNail" name="thumbNail" required > -->
               <label for="exteriorFiles" class="form-label">Exterior Photos</label>
@@ -97,7 +100,7 @@
             </form>
           </div>
       </div>
-      <div class="col-10">
+      <div class="col-10" id="carsSection">
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
