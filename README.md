@@ -6,9 +6,10 @@ create password recovery
 sort emails from user logins and email list (sort out duplicates)
     display two different groups for emails
 
-make tags for different catagories (rental, available, discount, sold) PROBLEM WITH BOOLEAN PRIVATE RENTAL ETC
+make tags for different catagories (rental, available, discount, sold) PROBLEM WITH BOOLEAN PRIVATE RENTAL ETC)
     make rental tags for the cars with overlayed "rental" tags on picture
     make available tags for the cars with overlayed "available" tags on picture
     make discount tags for the cars with overlayed "discount" tags on picture
     make sold tags for the cars with overlayed "sold" tags on picture
 
+USE THE FAVORITE FEATURE TO "PUBLISH" THE LISTING
