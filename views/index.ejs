@@ -14,40 +14,114 @@
         <p class="lead text-light">Since 2004, Expat Car Sales has provided Kuala Lumpur with a wide range of vehicle purchasing and renting options. We pride ourselves in only stocking well-maintained vehicles to meet the needs and standards of even the most discerning drivers.</p>
         
       </div>
-      <div class="col-lg-10">
-        <p class="text-light">Ready to buy, rent, or sell a car?</p>
-        <span class="text light"><a href="/contact" class="text-decoration-none">Contact Us</a> today.</span>
-        <a href="/feed" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Visit our virtual Showroom</a> 
-      </div>
-      <div class="col-lg-10">
-        <a href="#">Make a carosol of cars to BUY</a>
-        <a href="/profile" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Visit our virtual Showroom</a> 
-      </div>
-      <div class="col-lg-10">
-        <a href="#">Make a carosol of cars to RENT</a>
-      </div>
-      <div class="col-lg-10">
-        <a href="#">Do you want customer reviews? I think it looks tacky personaly, but can make this too.</a>
-      </div>
-      <div class="row flex pt-3">
-        <div class="col-lg-5">
-          <span class="text-light">Contact us:</span>
-          <a href="mailto:gerald@expatcarsaleskl.com">gerald@expatcarsaleskl.com</a>
-          <a href="https://wa.me/60142945817?text=I'm%20interested%20in%20your%20car%20for%20sale" class="text-decoration-none">WhatsApp +60 14-294 5817
-          </a>
-          <span class="text-light">68000 Ampang, Ukay Heights</span>
-
-        </div>
-        <div class="col-lg-5">
-          <a href="#">Do you want that video here?</a>
+    </div>
+    <div class="col col-lg-10 justify-content-center">
+      <p class="text-light">Ready to buy, rent, or sell a car?</p>
+      <span class="mb-5"><a class="text-light" href="/contact">Contact us</a> today.</span><br>
+      <a href="/feed" class="mt-5 mb-5 btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Visit our virtual Showroom</a> 
+    </div>
+    <div class="blaze-slider my-slider">
+      <div class="blaze-container">
+        <div class="blaze-track-container">
+          <div class="blaze-track">
+            <% for(let i=0; i<posts.length; i++) {%>
+              <%if(posts[i].forRent != true){ %>
+              <div class="">
+                <a class="text-decoration-none" href="/post/<%= posts[i]._id%>">
+                  <img class="ps-1 pe-1 img-fluid" src="<%= posts[i].exteriorImage[0]%>">
+                  <span class="ps-1 pe-1 h6 text-light mt-4 text-decoration-none"><%= posts[i].year %> <%= posts[i].make %> <%= posts[i].model %></span><br>
+                  <span class="ps-1 pe-1 h6 text-light mt-2"> ______</span><br>
+                  <span class="ps-1 pe-1 h6 text-light mt-2"><%= posts[i].priceOfficial === '' ? posts[i].priceWanted : posts[i].priceOfficial %></span>
+                </a>
+              </div>
+              <% } %>
+            <% } %> 
+          </div>
         </div>
       </div>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <a href="/signup" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Signup</a> 
-        <a href="/login" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Login</a>
+      <div class="controls">
+        <button class="blaze-prev">prev</button>
+        <div class="blaze-pagination"></div>
+        <button class="blaze-next">next</button>
       </div>
     </div>
-  </div>
+    
+    <div class="col-4">
+      <a href="/feed" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Visit our virtual Showroom</a> 
+    </div>
+
+    <div class="blaze-slider my-slider">
+      <div class="blaze-container">
+        <div class="blaze-track-container">
+          <div class="blaze-track">
+            <% for(let i=0; i<posts.length; i++) {%>
+              <%if(posts[i].forRent == true){ %>
+              <div class="">
+                <a class="text-decoration-none" href="/post/<%= posts[i]._id%>">
+                  <img class="ps-1 pe-1 img-fluid" src="<%= posts[i].exteriorImage[0]%>">
+                  <span class="ps-1 pe-1 h6 text-light mt-4 text-decoration-none"><%= posts[i].year %> <%= posts[i].make %> <%= posts[i].model %></span><br>
+                  <span class="ps-1 pe-1 h6 text-light mt-2"> ______</span><br>
+                  <span class="ps-1 pe-1 h6 text-light mt-2"><%= posts[i].priceOfficial === '' ? posts[i].priceWanted : posts[i].priceOfficial %></span>
+                </a>
+              </div>
+              <% } %>
+            <% } %> 
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="blaze-prev">prev</button>
+        <div class="blaze-pagination"></div>
+        <button class="blaze-next">next</button>
+      </div>
+    </div>
+    
+    <div class="col-lg-10">
+      <a href="#">Make a carosol of cars to RENT</a>
+    </div>
+    <div class="col-lg-10">
+      <a href="#">Do you want customer reviews? I think it looks tacky personaly, but can make this too.</a>
+    </div>
+    <div class="row flex pt-3">
+      <div class="col-lg-5">
+        <span class="text-light">Contact us:</span>
+        <a href="mailto:gerald@expatcarsaleskl.com">gerald@expatcarsaleskl.com</a>
+        <a href="https://wa.me/60142945817?text=I'm%20interested%20in%20your%20car%20for%20sale" class="text-decoration-none">WhatsApp +60 14-294 5817
+        </a>
+        <span class="text-light">68000 Ampang, Ukay Heights</span>
+      </div>
+      <div class="col-lg-5">
+        <a href="#">Do you want that video here?</a>
+      </div>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <a href="/signup" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Signup</a> 
+      <a href="/login" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Login</a>
+    </div>
+    
+</div>
+<script src="https://unpkg.com/blaze-slider@1.8.0/dist/blaze-slider.min.js"></script>
+<script>
+  const slider = document.querySelector(".blaze-slider");
+
+  new BlazeSlider(slider, {
+    all: {
+      enableAutoplay: true,
+      slidesToScroll: 3,
+      slidesToShow: 3,
+      transitionDuration: 300
+    },
+    "(max-width: 900px)": {
+      slidesToShow: 2,
+      slidesToShow: 2,
+      slidesGap: "40px"
+    },
+    "(max-width: 500px)": {
+      slidesToShow: 1,
+      slidesToScroll: 1
+    }
+  });
+</script>
 
 
 

@@ -22,7 +22,7 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const allPosts = await Post.find().sort({ cocktailName: 1 }).lean();
+      const allPosts = await Post.find().sort({ createdAt: 1 }).lean();
       const posts = allPosts.filter((e)=> e.public !== false)
       res.render("feed.ejs", { posts: posts });
       
@@ -132,7 +132,8 @@ module.exports = {
         documentImage: documentImgArray,
         cloudinaryId: cloudinaryIDArray,
         priceWanted: req.body.priceWanted,
-        priceOfficial: req.body.priceOfficial || req.body.priceWanted || 'Call For Price',   
+        priceOfficial: req.body.priceOfficial || 'Call For Price',   
+        forRent: req.body.forRent,
         public: req.body.public || 'false',
         user: req.user.id,
         agreement: req.body.agreement,
@@ -179,7 +180,9 @@ module.exports = {
         // cloudinaryId: result.public_id,
         priceOfficial: req.body.priceOfficial || req.body.priceWanted || 'Call For Price',   
         public: req.body.public || 'true',
-        
+        forRent: req.body.forRent,
+        rentOrSale: req.body.rentOrSale,
+        publicOrPrivate: req.body.publicOrPrivate,
           },
         }
       );

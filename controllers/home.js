@@ -1,8 +1,16 @@
 const Email = require("../models/EmailList.js");
+const Post = require("../models/Post");
 
 module.exports = {
-  getIndex: (req, res) => {
-    res.render("index.ejs");
+  getIndex: async (req, res) => {
+    try {
+      const allPosts = await Post.find().sort({ createdAt: 1 }).lean();
+      const posts = allPosts.filter((e)=> e.public !== false)
+      res.render("index.ejs", { posts: posts });
+      
+    } catch (err) {
+      console.log(err);
+    }
   },
 
   getSellYourCar: (req, res) => {

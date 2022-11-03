@@ -92,8 +92,24 @@
             </div>
             <%if(user.isBoss == true){ %>
             <div class="mb-10 form-check form-switch pt-4">
+              <input class="form-check-input" type="checkbox" role="switch" id="forRent" name="forRent" value="true" >
+              <label class="form-check-labe text-white" for="forRent">Is this car for rent?</label>
+            </div>
+            <div class="mb-10 form-check form-switch pt-4">
               <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="public" value="true">
-              <label class="form-check-label" for="flexSwitchCheckChecked">This will only be viewable by Gerald</label>
+              <label class="form-check-label" for="flexSwitchCheckChecked">Make this Car Public?</label>
+            </div>
+            <div>
+              <select name="publicOrPrivate" id="publicOrPrivate">
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+              </select>
+            </div>
+            <div>
+              <select name="rentOrSale" id="rentOrSale">
+                <option value="rent">Rent</option>
+                <option value="sale">Sale</option>
+              </select>
             </div>
             <%}%>
               <button type="submit" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold mt-4" value="Upload">Submit</button>

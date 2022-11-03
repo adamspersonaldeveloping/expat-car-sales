@@ -131,11 +131,23 @@ const PostSchema = new mongoose.Schema({
   },
   agreement: {
     type: String,
-    required: false,
+    require: false,
+  },
+  forRent: {
+    type: Boolean,
+    require: true,
   },
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  publicOrPrivate: {
+    type: String,
+    require: false,
+  },
+  rentOrSale: {
+    type: String,
+    require: false,
   },
 });
 
