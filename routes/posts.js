@@ -21,4 +21,7 @@ router.put("/makePublic/:id", postsController.makePublic);
 
 router.delete("/deletePost/:id", postsController.deletePost);
 
+router.put("/togglePrivatePublic/:id", postsController.togglePrivatePublic);
+
+
 module.exports = router;

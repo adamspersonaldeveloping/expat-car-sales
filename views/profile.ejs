@@ -91,22 +91,22 @@
               <input style="background:rgba(255,255,255,0.7)" type="file" class="form-control" id="documentFiles" name="documentFiles" required multiple >
             </div>
             <%if(user.isBoss == true){ %>
-            <div class="mb-10 form-check form-switch pt-4">
+            <!-- <div class="mb-10 form-check form-switch pt-4">
               <input class="form-check-input" type="checkbox" role="switch" id="forRent" name="forRent" value="true" >
               <label class="form-check-labe text-white" for="forRent">Is this car for rent?</label>
             </div>
             <div class="mb-10 form-check form-switch pt-4">
               <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="public" value="true">
               <label class="form-check-label" for="flexSwitchCheckChecked">Make this Car Public?</label>
-            </div>
+            </div> -->
             <div>
-              <select name="publicOrPrivate" id="publicOrPrivate">
+              <select name="publicOrPrivate" id="publicOrPrivate" value="private">
                 <option value="public">Public</option>
                 <option value="private">Private</option>
               </select>
             </div>
             <div>
-              <select name="rentOrSale" id="rentOrSale">
+              <select name="rentOrSale" id="rentOrSale" value="sale">
                 <option value="rent">Rent</option>
                 <option value="sale">Sale</option>
               </select>

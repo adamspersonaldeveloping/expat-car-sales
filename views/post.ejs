@@ -176,14 +176,28 @@
           <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="issues" name="issues" placeholder="Please let any issues, large or small, that you know of."  value="<%= post.issues %>">
           <label for="priceOfficial" class="form-label pt-3 pb-2">Official Price</label>
           <input style="background:rgba(255,255,255,0.7)" type="text" class="form-control" id="priceOfficial" name="priceOfficial" placeholder="Please let any issues, large or small, that you know of."  value="<%= post.priceOfficial %>">
-          <label for="forRent" class="form-label pt-3 pb-2">Is this car for rent?</label>
-          <input style="background:rgba(255,255,255,0.7)" type="checkbox" class="" id="forRent" name="forRent"  value="">
+          
+          
         </div>
         <div class="mb-10 form-check form-switch pt-4">
           <!-- <input class="form-check-input" type="checkbox" role="switch" id="forRent" name="forRent"  checked>
           <label class="form-check-labe text-white" for="forRent">Is this car for rent?</label> -->
-          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="public" value="<%= post.public %>" checked>
+          <!-- <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="public" value="<%= post.public %>" checked>
           <label class="form-check-labe text-white" for="flexSwitchCheckChecked">Publish</label>
+        </div> -->
+        <div>
+          <label for="publicOrPrivate" class="form-label pt-3 text-light pb-2">Do you want to make this car <%= post.publicOrPrivate == "public" ? "private or keep it public" : "public or keep it private" %>?</label>
+          <select name="publicOrPrivate" id="publicOrPrivate" >
+            <option value="public" <%= post.publicOrPrivate == "public" ? 'selected' : '' %>>Public</option>
+            <option value="private" <%= post.publicOrPrivate == "private" ? 'selected' : '' %> >Private</option>
+          </select>
+        </div>
+        <div>
+          <label for="rentOrSale" class="form-label pt-3 text-light pb-2">Do you want to make this car <%= post.rentOrSale == "sale" ? "for rent or keep it as a sale" : "for sale or keep it for rent" %>?</label>
+          <select name="rentOrSale" id="rentOrSale" value="<%= post.rentOrSale %>">
+            <option value="rent" <%= post.rentOrSale == "rent" ? 'selected' : '' %> >Rent</option>
+            <option value="sale" <%= post.rentOrSale == "sale" ? 'selected' : '' %> >Sale</option>
+          </select>
         </div>
         <button type="submit" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold mt-4" value="Upload">Update</button>
       </form>

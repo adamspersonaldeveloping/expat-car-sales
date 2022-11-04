@@ -22,9 +22,9 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const allPosts = await Post.find().sort({ createdAt: 1 }).lean();
-      const posts = allPosts.filter((e)=> e.public !== false)
-      res.render("feed.ejs", { posts: posts });
+      const posts = await Post.find().sort({ createdAt: 1 }).lean();
+      //const posts = allPosts.filter((e)=> e.publicOrPrivate == "public")
+      res.render("feed.ejs", { posts: posts, user: req.user });
       
     } catch (err) {
       console.log(err);
@@ -137,6 +137,8 @@ module.exports = {
         public: req.body.public || 'false',
         user: req.user.id,
         agreement: req.body.agreement,
+        rentOrSale: req.body.rentOrSale,
+        publicOrPrivate: req.body.publicOrPrivate,
       });
       
       console.log("Post has been added!");
@@ -205,6 +207,23 @@ module.exports = {
       
       console.log("Added to favorites");
       res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  togglePrivatePublic: async (req, res) => {
+    const newSetting = req.body.publicOrPrivate === "private" ? "public" : "private"
+    // change this to save the post id to an array under the User
+    try {
+      await Post.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $set: {publicOrPrivate: newSetting },
+        }
+      );
+      
+      console.log(`Changed from ${req.params.publicOrPrivate} to ${newSetting}`);
+      res.redirect(`/feed`);
     } catch (err) {
       console.log(err);
     }

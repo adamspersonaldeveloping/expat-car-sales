@@ -2,29 +2,40 @@
   <div class="container">
     <div class="row justify-content-center mt-5">
        
-      <a href="/feedZtoA" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">List Z - A</a>
+      <!-- <a href="/feedZtoA" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">List Z - A</a> -->
      
      
       <ul class="row list-unstyled">
+        <% user.isBoss !== true ? posts = posts.filter(e => e.publicOrPrivate !== 'private') : posts = posts %> 
+        
         <% for(var i=0; i<posts.length; i++) {%>
-          
+              
           <li class="col-6 justify-content-between mt-5">
             
             <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].exteriorImage[0]%>">
               <h2 class="text-white"><%= posts[i].year %> <%= posts[i].make %> <%= posts[i].model %></h2>
             </a>
-            
+            <% if(posts[i].publicOrPrivate === 'private') {%>
+              <form
+              class="col-12"
+              action="/post/togglePrivatePublic/<%= posts[i].id %>?_method=PUT"
+              method="POST"
+            >
+              <input type="hidden" name="publicOrPrivate" value="<%= posts[i].publicOrPrivate %>">
+              <button class="btn btn-primary" type="submit">This post is hidden, make it public?</button>
+            </form>
+            <%}%>
             <!-- <form
               class="col-1"
               action="/post/favoritePost/<%= posts[i].id %>?_method=PUT"
               method="POST"
             >
-              <button class="btn btn-primary fa fa-heart" type="submit"></button>
+              <button class="btn btn-primary fa fa-heart" type="submit">This post is hidden, make it public?</button>
             </form> -->
           </li>
-        
-        <% } %>
+         
+          <% } %>
         </ul>
     </div>
   </div>  

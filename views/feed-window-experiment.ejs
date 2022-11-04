@@ -101,8 +101,41 @@ class="row justify-content-center mt-3"
     <p class="text-secondary"><%= post.importance %></p>
   </div>
   <%}%>
-
-
+<!-- Trying to filter cars that are private from the public but allow bossman to see all cars. -->
+  <% if (user.isBoss !== true) {%> 
+    posts.filter(e => e.publicOrPrivate != 'private')
+  
+  <% for(var i=0; i<posts.length; i++) {%>
+    <% if (user.isBoss == true) {%> 
+      
+    <li class="col-6 justify-content-between mt-5">
+      
+      <a href="/post/<%= posts[i]._id%>">
+        <img class="img-fluid" src="<%= posts[i].exteriorImage[0]%>">
+        <h2 class="text-white"><%= posts[i].year %> <%= posts[i].make %> <%= posts[i].model %></h2>
+      </a>
+      
+      <!-- <form
+        class="col-1"
+        action="/post/favoritePost/<%= posts[i].id %>?_method=PUT"
+        method="POST"
+      >
+        <button class="btn btn-primary fa fa-heart" type="submit"></button>
+      </form> -->
+    </li>
+    <% } else if (user.isBoss !== true && posts[i].publicOrPrivate == "public") { %>
+      <li class="col-6 justify-content-between mt-5">
+      
+        <a href="/post/<%= posts[i]._id%>">
+          <img class="img-fluid" src="<%= posts[i].exteriorImage[0]%>">
+          <h2 class="text-white"><%= posts[i].year %> <%= posts[i].make %> <%= posts[i].model %></h2>
+        </a>
+        
+       
+      </li>
+  <% } else { %> 
+    <!-- post is private -->
+    <% } %>
   <!-- This is for uploading a defualt image to cloudinary if none is provided.
     let result;
       if(req.file) result = await cloudinary.uploader.upload(req.file.path);

@@ -13,3 +13,9 @@ make tags for different catagories (rental, available, discount, sold) PROBLEM W
     make sold tags for the cars with overlayed "sold" tags on picture
 
 USE THE FAVORITE FEATURE TO "PUBLISH" THE LISTING
+
+
+Crafting story as a bartender (Class 68 minute 34) Should have a different story for every company that you apply to
+    - for twitter
+        - over the years I have had the previliage of working with great and horrible software. Over the last year I had to work with an ordering system that did not work.
+        I decided then and there that I would learn how to write better software so that 
