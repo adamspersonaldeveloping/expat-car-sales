@@ -5,7 +5,7 @@ const postsController = require("../controllers/posts");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Post Routes - simplified for now
-router.get("/:id", ensureAuth, postsController.getPost);
+router.get("/:id", postsController.getPost);
 
 router.post("/createPost", upload.fields([{ name: "exteriorFiles", maxCount: 10}, { name: "interiorFiles", maxCount: 10}, { name: "documentFiles", maxCount: 10}]), postsController.createPost);
 
