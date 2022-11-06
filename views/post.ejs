@@ -56,8 +56,9 @@
           <li class="text-white">Known Issues: <%= post.issues %></li>
         </ul>
       </div>
-      <%if(user.isBoss == true){ %>
-        
+      <%if(user == undefined || user.isBoss !== true){ %>
+        <span></span>
+        <%}else{%>
         <div class="col">
           <h2 class="text-light">Gerland's Eyes Only</h2>
           <h2 class="text-light">Owner Info</h2>
@@ -92,8 +93,10 @@
         </div> 
         <!-- end document carousel -->
       <%}%> 
-      //add delete option
-      <%if(user.isBoss == true){ %>
+      <!-- add delete option -->
+      <%if( user == undefined || user.isBoss !== true){ %>
+        <span></span>
+        <%}else{%>
         <form
         class="row justify-content-center mt-3"
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
@@ -118,7 +121,9 @@
     <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="/profile">Sell You Car</a>
     <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="/feed">Our Showroom</a>
   </div>
-  <%if(user.isBoss == true){ %>
+  <%if( user == undefined || user.isBoss !== true){ %>
+    <span></span>
+    <%}else{%>
     <div class="col  text-center mt-3">
       <a class="btn btn-primary" data-toggle="collapse" href="#updateForm" role="button" aria-expanded="false" aria-controls="updateForm">update</a>
     </div>
