@@ -46,8 +46,8 @@
       </div>
     </div>
     
-    <div class="col-4">
-      <a href="/feed" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Visit our virtual Showroom</a> 
+    <div class="justify-content-center">
+      <a href="/feed" class="col-lg-4 btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Visit our virtual Showroom</a> 
     </div>
 
     <div class="blaze-slider my-slider">
@@ -58,7 +58,7 @@
               <%if(posts[i].forRent == true){ %>
               <div class="">
                 <a class="text-decoration-none" href="/post/<%= posts[i]._id%>">
-                  <img class="ps-1 pe-1 img-fluid" src="<%= posts[i].exteriorImage[0]%>">
+                  <img class="ps-1 pe-1 img-fluid rounded" src="<%= posts[i].exteriorImage[0]%>">
                   <span class="ps-1 pe-1 h6 text-light mt-4 text-decoration-none"><%= posts[i].year %> <%= posts[i].make %> <%= posts[i].model %></span><br>
                   <span class="ps-1 pe-1 h6 text-light mt-2"> ______</span><br>
                   <span class="ps-1 pe-1 h6 text-light mt-2"><%= posts[i].priceOfficial === '' ? posts[i].priceWanted : posts[i].priceOfficial %></span>
@@ -77,7 +77,33 @@
     </div>
     
   
-    <div class="col-lg-10">
+    <div class="container">
+      <div class="col-12">
+        <div class="blaze-slider my-slider">
+          <div class="blaze-container">
+            <div class="blaze-track-container">
+              <div class="blaze-track">
+                <% for(let i=0; i<posts.length; i++) {%>
+                  <%if(posts[i].forRent == true){ %>
+                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Header</div>
+                      <div class="card-body">
+                        <h5 class="card-title">Secondary card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                  <% } %>
+                <% } %> 
+              </div>
+            </div>
+          </div>
+          <div class="controls">
+            <button class="blaze-prev">prev</button>
+            <div class="blaze-pagination"></div>
+            <button class="blaze-next">next</button>
+          </div>
+        </div>
+      </div>
       <a href="#">Do you want customer reviews? I think it looks tacky personaly, but can make this too.</a>
     </div>
     <div class="row flex pt-3">
