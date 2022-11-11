@@ -81,7 +81,7 @@
       <div class="blaze-container">
         <div class="blaze-track-container">
           <div class="blaze-track">
-            <% for(let i=0; i<posts.length; i++) {%>
+            <% for(let i=0; i<reviews.length; i++) {%>
               
                 <div class="col">
                   <a class="text-decoration-none" href="https://www.google.com/maps/place/Expat+Car+Sales+KL/@3.1955686,101.7721666,15z/data=!4m8!3m7!1s0x31cc376dd23be063:0x64ac87d74f08bcf!8m2!3d3.1955686!4d101.7721666!9m1!1b1!16s%2Fg%2F11h6ddqyv7">
@@ -102,31 +102,7 @@
         <button class="blaze-next">next</button>
       </div>
     </div>
-        <div class="blaze-slider my-slider">
-          <div class="blaze-container">
-            <div class="blaze-track-container">
-              <div class="blaze-track">
-                <% for(let i=0; i<reviews.length; i++) {%>
-                  
-                    <div class="col">
-                      <a class="text-decoration-none" href="https://www.google.com/maps/place/Expat+Car+Sales+KL/@3.1955686,101.7721666,15z/data=!4m8!3m7!1s0x31cc376dd23be063:0x64ac87d74f08bcf!8m2!3d3.1955686!4d101.7721666!9m1!1b1!16s%2Fg%2F11h6ddqyv7">
-                        <span class="text-light" style="font-size: 12px;"><%= reviews[i].reviewName %></span>
-                        <h5 class="text-light" style="font-size: 12px;"><%= reviews[i].reviewStars %> Stars</h5>
-                        <p class="text-light" style="font-size: 12px;"><%= reviews[i].reviewMessage %></p>
-                      </a>
-                     
-                    </div>
-                
-                <% } %> 
-              </div>
-            </div>
-          </div>
-          <div class="controls">
-            <button class="blaze-prev">prev</button>
-            <div class="blaze-pagination"></div>
-            <button class="blaze-next">next</button>
-          </div>
-        </div>
+        
       <a href="#">Do you want customer reviews? I think it looks tacky personaly, but can make this too.</a>
       <div class="col  text-center mt-3">
         <a class="btn btn-primary" data-toggle="collapse" href="#leaveReview" role="button" aria-expanded="false" aria-controls="leaveReview">Leave a Review</a>
