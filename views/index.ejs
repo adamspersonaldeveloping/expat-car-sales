@@ -77,22 +77,46 @@
     </div>
     
   
-    <div class="container">
-      <div class="col-12">
+    <div class="blaze-slider my-slider">
+      <div class="blaze-container">
+        <div class="blaze-track-container">
+          <div class="blaze-track">
+            <% for(let i=0; i<posts.length; i++) {%>
+              
+                <div class="col">
+                  <a class="text-decoration-none" href="https://www.google.com/maps/place/Expat+Car+Sales+KL/@3.1955686,101.7721666,15z/data=!4m8!3m7!1s0x31cc376dd23be063:0x64ac87d74f08bcf!8m2!3d3.1955686!4d101.7721666!9m1!1b1!16s%2Fg%2F11h6ddqyv7">
+                    <span class="text-light" style="font-size: 12px;"><%= reviews[i].reviewName %></span>
+                    <h5 class="text-light" style="font-size: 12px;"><%= reviews[i].reviewStars %> Stars</h5>
+                    <p class="text-light" style="font-size: 12px;"><%= reviews[i].reviewMessage %></p>
+                  </a>
+                 
+                </div>
+              
+            <% } %> 
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="blaze-prev">prev</button>
+        <div class="blaze-pagination"></div>
+        <button class="blaze-next">next</button>
+      </div>
+    </div>
         <div class="blaze-slider my-slider">
           <div class="blaze-container">
             <div class="blaze-track-container">
               <div class="blaze-track">
-                <% for(let i=0; i<posts.length; i++) {%>
-                  <%if(posts[i].forRent == true){ %>
-                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
-                      <div class="card-header">Header</div>
-                      <div class="card-body">
-                        <h5 class="card-title">Secondary card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
+                <% for(let i=0; i<reviews.length; i++) {%>
+                  
+                    <div class="col">
+                      <a class="text-decoration-none" href="https://www.google.com/maps/place/Expat+Car+Sales+KL/@3.1955686,101.7721666,15z/data=!4m8!3m7!1s0x31cc376dd23be063:0x64ac87d74f08bcf!8m2!3d3.1955686!4d101.7721666!9m1!1b1!16s%2Fg%2F11h6ddqyv7">
+                        <span class="text-light" style="font-size: 12px;"><%= reviews[i].reviewName %></span>
+                        <h5 class="text-light" style="font-size: 12px;"><%= reviews[i].reviewStars %> Stars</h5>
+                        <p class="text-light" style="font-size: 12px;"><%= reviews[i].reviewMessage %></p>
+                      </a>
+                     
                     </div>
-                  <% } %>
+                
                 <% } %> 
               </div>
             </div>
@@ -103,8 +127,33 @@
             <button class="blaze-next">next</button>
           </div>
         </div>
-      </div>
       <a href="#">Do you want customer reviews? I think it looks tacky personaly, but can make this too.</a>
+      <div class="col  text-center mt-3">
+        <a class="btn btn-primary" data-toggle="collapse" href="#leaveReview" role="button" aria-expanded="false" aria-controls="leaveReview">Leave a Review</a>
+      </div>
+      <div class="col collapse" id="leaveReview">
+        <form action="/review/?_method=POST"  method="POST">
+          <div class="mb-10 text-white">
+            <h2 class="text-white mb-10">Leave a review!</h2>
+            <label for="reviewName" class="pt-3 pb-2" >Your Name</label>
+            <input type="text" placeholder="Your Name" value="" name="reviewName" class="form-control transBack col-3" required>
+            <label for="reviewEmail" class="pt-3 pb-2" >Your Email</label>
+            <input type="text" placeholder="Your Email" value="" name="reviewEmail" class="form-control transBack col-3" required>
+            <div class="dropdown dropdown-dark mt-3 mb-2">
+              <select class="dropdown-select" name="reviewStars" id="reviewStars" required>
+                <option value="" disabled selected>Select</option>
+                <option value="1" > &#9733;&#9734;&#9734;&#9734;&#9734; </option>
+                <option value="2" > &#9733;&#9733;&#9734;&#9734;&#9734; </option>
+                <option value="3" > &#9733;&#9733;&#9733;&#9734;&#9734; </option>
+                <option value="4" > &#9733;&#9733;&#9733;&#9733;&#9734; </option>
+                <option value="5" > &#9733;&#9733;&#9733;&#9733;&#9733; </option>
+              </select>
+            </div><br>
+            <label for="reviewMessage">Review</label>
+						<textarea name="reviewMessage" id="reviewMessage" rows="2" class="form-control transBack" placeholder="Write your review here" required></textarea>
+          <button type="submit" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold mt-4" value="Upload">Submit Review</button>
+        </form>
+      </div>
     </div>
     <div class="row flex pt-3">
       <div class="col-lg-5">

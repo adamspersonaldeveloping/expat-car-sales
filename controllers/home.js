@@ -1,12 +1,14 @@
 const Email = require("../models/EmailList.js");
 const Post = require("../models/Post");
+const Review = require("../models/Review")
 
 module.exports = {
   getIndex: async (req, res) => {
     try {
       const allPosts = await Post.find().sort({ createdAt: 1 }).lean();
       const posts = allPosts.filter((e)=> e.public !== false)
-      res.render("index.ejs", { posts: posts });
+      const reviews = await Review.find().sort({createdAt: 1}).lean();
+      res.render("index.ejs", { posts: posts, reviews: reviews, user: req.user });
       
     } catch (err) {
       console.log(err);
@@ -47,6 +49,21 @@ module.exports = {
   },
   getServices: (req, res) => {
     res.render('ourServices.ejs')
+  },
+  newReview: async (req, res) => {
+    try {
+      
+      await Review.create({
+        reviewName: req.body.reviewName,
+        reviewStars: req.body.reviewStars,
+        reviewMessage: req.body.reviewMessage,
+        reviewEmail: req.body.reviewEmail,
+      });
+      console.log("Review has been submitted!");
+      res.redirect("/");
+    } catch (err) {
+      console.log(err);
+    }
   },
 
   addEmailToList: async (req, res) => {

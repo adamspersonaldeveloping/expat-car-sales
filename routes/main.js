@@ -24,6 +24,7 @@ router.get("/inspection", homeController.getInspection)
 router.get("/contact", homeController.getContact)
 router.get("/about", homeController.getAbout)
 
+router.post('/review', homeController.newReview)
 
 router.get("/forumFeed", ensureAuth, forumController.getForumFeed);
 
