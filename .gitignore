@@ -1,2 +1,5 @@
 /config/.env
 /node_modules
+/webscraper-google-reviews/.env
+/webscraper-google-reviews/venv
+/webscraper-google-reviews/ecs-reviews.py
