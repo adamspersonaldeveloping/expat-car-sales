@@ -14,4 +14,6 @@ make tags for different catagories (rental, available, discount, sold) PROBLEM W
 
 USE THE FAVORITE FEATURE TO "PUBLISH" THE LISTING(?)
 
+Continue working on thumbnail background removal and watermark on upload (https://cloudinary.com/documentation/cloudinary_ai_background_removal_addon)
+
 
